@@ -22,6 +22,7 @@ attachment::att_amend_desc()
 ## Create a module infrastructure in R/
 golem::add_module(name = "country_selection", with_test = FALSE) # Name of the module
 golem::add_module(name = "variable_selection", with_test = FALSE) # Name of the module
+golem::add_module(name = "plots", with_test = FALSE) # Name of the module
 
 ## Add helper functions ----
 ## Creates fct_* and utils_*
