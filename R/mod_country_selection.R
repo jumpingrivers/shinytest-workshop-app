@@ -10,6 +10,12 @@ mod_country_selection_ui <- function(id) {
   ns <- NS(id)
   tagList(
     selectInput(
+      inputId = ns("region_selection"),
+      label = "Filter countries by region",
+      choices = NULL,
+      multiple = TRUE
+    ),
+    selectInput(
       inputId = ns("country_selection"),
       label = "Select some countries",
       choices = NULL,
@@ -31,17 +37,35 @@ mod_country_selection_server <- function(id, rx_dataset) {
   moduleServer(id, function(input, output, session) {
     ns <- session$ns
 
-    all_countries <- reactive({
-      sort(unique(rx_dataset()[["country"]]))
+    all_regions <- reactive({
+      ds <- rx_dataset()
+      stopifnot("region" %in% colnames(ds))
+      sort(unique(ds[["region"]]))
     })
 
     available_countries <- reactive({
-      all_countries()
+      ds <- rx_dataset()
+      stopifnot("country" %in% colnames(ds))
+
+      filtered <- if (!isTruthy(input$region_selection)) {
+        ds
+      } else {
+        dplyr::filter(ds, .data[["region"]] %in% input$region_selection)
+      }
+
+      sort(unique(filtered[["country"]]))
     })
 
     observe({
-      req(available_countries())
+      updateSelectInput(
+        session = session,
+        inputId = "region_selection",
+        choices = all_regions(),
+        selected = NULL
+      )
+    })
 
+    observe({
       updateSelectInput(
         session = session,
         inputId = "country_selection",
