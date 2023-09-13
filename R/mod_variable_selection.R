@@ -9,15 +9,59 @@
 #' @importFrom shiny NS tagList
 mod_variable_selection_ui <- function(id) {
   ns <- NS(id)
-  tagList()
+  tagList(
+    selectInput(
+      inputId = ns("x_variable"),
+      label = "X-axis variable",
+      choices = NULL,
+      multiple = FALSE
+    ),
+    selectInput(
+      inputId = ns("y_variable"),
+      label = "Y-axis variable",
+      choices = NULL,
+      multiple = FALSE
+    )
+  )
 }
 
 #' variable_selection Server Functions
 #'
 #' @noRd
-mod_variable_selection_server <- function(id) {
+mod_variable_selection_server <- function(id, rx_dataset) {
   moduleServer(id, function(input, output, session) {
     ns <- session$ns
+
+    all_numeric_vars <- reactive({
+      rx_dataset() |>
+        dplyr::select_if(is.numeric) |>
+        colnames()
+    })
+
+    var_choice_vector <- reactive({
+      ds <- rx_dataset()
+      stopifnot("colname_map" %in% names(attributes(ds)))
+      colname_map <- attr(ds, "colname_map")
+      choices <- colname_map[colname_map %in% all_numeric_vars()]
+      choices
+    })
+
+    observe({
+      updateSelectInput(
+        session = session,
+        inputId = "x_variable",
+        choices = var_choice_vector(),
+        selected = NULL
+      )
+    })
+    observe({
+      updateSelectInput(
+        session = session,
+        inputId = "y_variable",
+        choices = var_choice_vector(),
+        selected = NULL
+      )
+    })
   })
 }
 
