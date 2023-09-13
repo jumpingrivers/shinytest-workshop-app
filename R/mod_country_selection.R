@@ -30,7 +30,7 @@ mod_country_selection_server <- function(id, rx_dataset) {
     all_regions <- reactive({
       ds <- rx_dataset()
       stopifnot("region" %in% colnames(ds))
-      sort(unique(ds[["region"]]))
+      extract_unique(ds, "region")
     })
 
     # If the user selects specific regions through the selectInput element, use those regions
@@ -52,7 +52,7 @@ mod_country_selection_server <- function(id, rx_dataset) {
         dplyr::filter(ds, .data[["region"]] %in% rx_selected_regions())
       }
 
-      sort(unique(filtered[["country"]]))
+      extract_unique(filtered, "country")
     })
 
     # If the user selects specific countries through the selectInput element, use those countries
