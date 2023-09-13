@@ -23,6 +23,11 @@ mod_variable_selection_server <- function(id, rx_dataset) {
   moduleServer(id, function(input, output, session) {
     ns <- session$ns
 
+    selected_variable <- reactiveValues(
+      name = NULL,
+      label = NULL
+    )
+
     all_numeric_vars <- reactive({
       rx_dataset() |>
         dplyr::select_if(is.numeric) |>
@@ -37,14 +42,20 @@ mod_variable_selection_server <- function(id, rx_dataset) {
       choices
     })
 
-    rx_selected_variable <- mod_dynamic_selector_server(
+    selected_variable_name <- mod_dynamic_selector_server(
       id = "variable",
       choices = var_choice_vector,
       selected = reactive(NULL)
     )
 
+    observe({
+      selected_variable$name <- selected_variable_name()
+      selected_variable$label <- invert_names(var_choice_vector())[selected_variable_name()]
+    }) |>
+      bindEvent(selected_variable_name())
+
     return(
-      rx_selected_variable
+      selected_variable
     )
   })
 }

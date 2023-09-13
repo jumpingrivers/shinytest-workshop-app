@@ -24,21 +24,21 @@ mod_plots_server <- function(id,
                              rx_x_var,
                              rx_y_var) {
   stopifnot(is.reactive(rx_plotting_dataset))
-  stopifnot(is.reactive(rx_x_var))
-  stopifnot(is.reactive(rx_y_var))
+  stopifnot(is.reactivevalues(rx_x_var))
+  stopifnot(is.reactivevalues(rx_y_var))
 
   moduleServer(id, function(input, output, session) {
     ns <- session$ns
 
     output$scatter <- renderPlot({
-      req(rx_x_var())
-      req(rx_y_var())
+      req(rx_x_var$name)
+      req(rx_y_var$name)
 
       ggplot2::ggplot(
         data = rx_plotting_dataset(),
         mapping = ggplot2::aes(
-          x = .data[[rx_x_var()]],
-          y = .data[[rx_y_var()]]
+          x = .data[[rx_x_var$name]],
+          y = .data[[rx_y_var$name]]
         )
       ) +
         ggplot2::geom_point()
