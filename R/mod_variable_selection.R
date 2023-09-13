@@ -2,23 +2,19 @@
 #'
 #' @description A shiny Module.
 #'
-#' @param id,input,output,session Internal parameters for {shiny}.
+#' @param   id   Parameter to connect UI and server.
+#' @param   label   Label for the input selector.
 #'
 #' @noRd
 #'
 #' @importFrom shiny NS tagList
-mod_variable_selection_ui <- function(id) {
+
+mod_variable_selection_ui <- function(id, label) {
   ns <- NS(id)
   tagList(
     selectInput(
-      inputId = ns("x_variable"),
-      label = "X-axis variable",
-      choices = NULL,
-      multiple = FALSE
-    ),
-    selectInput(
-      inputId = ns("y_variable"),
-      label = "Y-axis variable",
+      inputId = ns("selected_variable"),
+      label = label,
       choices = NULL,
       multiple = FALSE
     )
@@ -49,19 +45,15 @@ mod_variable_selection_server <- function(id, rx_dataset) {
     observe({
       updateSelectInput(
         session = session,
-        inputId = "x_variable",
+        inputId = "selected_variable",
         choices = var_choice_vector(),
         selected = NULL
       )
     })
-    observe({
-      updateSelectInput(
-        session = session,
-        inputId = "y_variable",
-        choices = var_choice_vector(),
-        selected = NULL
-      )
-    })
+
+    return(
+      reactive(input$selected_variable)
+    )
   })
 }
 
