@@ -33,6 +33,9 @@ mod_country_selection_server <- function(id, rx_dataset) {
       sort(unique(ds[["region"]]))
     })
 
+    # If the user selects specific regions through the selectInput element, use those regions
+    # Otherwise (when the selectInput is empty) use every region that is available
+
     rx_selected_regions <- mod_dynamic_selector_server(
       id = "regions",
       choices = all_regions,
@@ -52,14 +55,26 @@ mod_country_selection_server <- function(id, rx_dataset) {
       sort(unique(filtered[["country"]]))
     })
 
-    rx_selected_countries <- mod_dynamic_selector_server(
+    # If the user selects specific countries through the selectInput element, use those countries
+    # Otherwise (ie, if the selectInput is empty) use every country for the selected region(s)
+
+    user_selected_countries <- mod_dynamic_selector_server(
       id = "countries",
       choices = available_countries,
       selected = reactive(NULL)
     )
 
+    country_set <- reactive({
+      countries <- if (!isTruthy(user_selected_countries())) {
+        available_countries()
+      } else {
+        user_selected_countries()
+      }
+      countries
+    })
+
     return(
-      rx_selected_countries
+      country_set
     )
   })
 }
