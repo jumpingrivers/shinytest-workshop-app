@@ -75,9 +75,7 @@ mod_country_selection_server <- function(id, rx_dataset) {
     })
 
     return(
-      list(
-        countries = reactive(input$country_selection)
-      )
+      reactive(input$country_selection)
     )
   })
 }
