@@ -41,7 +41,11 @@ mod_plots_server <- function(id,
           y = .data[[rx_y_var$name]]
         )
       ) +
-        ggplot2::geom_point()
+        ggplot2::geom_point() +
+        ggplot2::labs(
+          x = rx_x_var$label,
+          y = rx_y_var$label
+        )
     })
   })
 }
