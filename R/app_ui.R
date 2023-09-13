@@ -10,7 +10,15 @@ app_ui <- function(request) {
     golem_add_external_resources(),
     # Your application UI logic
     fluidPage(
-      h1("unstats")
+      h1("UN Statistics"),
+      sidebarPanel(
+        mod_country_selection_ui("countries"),
+        mod_variable_selection_ui("x_variable", "X-axis variable"),
+        mod_variable_selection_ui("y_variable", "Y-axis variable")
+      ),
+      mainPanel(
+        mod_plots_ui("plot")
+      )
     )
   )
 }
