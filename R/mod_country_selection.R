@@ -9,18 +9,8 @@
 mod_country_selection_ui <- function(id) {
   ns <- NS(id)
   tagList(
-    selectInput(
-      inputId = ns("region_selection"),
-      label = "Filter countries by region",
-      choices = NULL,
-      multiple = TRUE
-    ),
-    selectInput(
-      inputId = ns("country_selection"),
-      label = "Select some countries",
-      choices = NULL,
-      multiple = TRUE
-    )
+    mod_dynamic_selector_ui(ns("regions"), "Filter countries by region", multiple = TRUE),
+    mod_dynamic_selector_ui(ns("countries"), "Select some countries", multiple = TRUE)
   )
 }
 
@@ -43,39 +33,33 @@ mod_country_selection_server <- function(id, rx_dataset) {
       sort(unique(ds[["region"]]))
     })
 
+    rx_selected_regions <- mod_dynamic_selector_server(
+      id = "regions",
+      choices = all_regions,
+      selected = reactive(NULL)
+    )
+
     available_countries <- reactive({
       ds <- rx_dataset()
       stopifnot("country" %in% colnames(ds))
 
-      filtered <- if (!isTruthy(input$region_selection)) {
+      filtered <- if (!isTruthy(rx_selected_regions())) {
         ds
       } else {
-        dplyr::filter(ds, .data[["region"]] %in% input$region_selection)
+        dplyr::filter(ds, .data[["region"]] %in% rx_selected_regions())
       }
 
       sort(unique(filtered[["country"]]))
     })
 
-    observe({
-      updateSelectInput(
-        session = session,
-        inputId = "region_selection",
-        choices = all_regions(),
-        selected = NULL
-      )
-    })
-
-    observe({
-      updateSelectInput(
-        session = session,
-        inputId = "country_selection",
-        choices = available_countries(),
-        selected = NULL
-      )
-    })
+    rx_selected_countries <- mod_dynamic_selector_server(
+      id = "countries",
+      choices = available_countries,
+      selected = reactive(NULL)
+    )
 
     return(
-      reactive(input$country_selection)
+      rx_selected_countries
     )
   })
 }

@@ -12,12 +12,7 @@
 mod_variable_selection_ui <- function(id, label) {
   ns <- NS(id)
   tagList(
-    selectInput(
-      inputId = ns("selected_variable"),
-      label = label,
-      choices = NULL,
-      multiple = FALSE
-    )
+    mod_dynamic_selector_ui(ns("variable"), label, multiple = FALSE),
   )
 }
 
@@ -42,17 +37,14 @@ mod_variable_selection_server <- function(id, rx_dataset) {
       choices
     })
 
-    observe({
-      updateSelectInput(
-        session = session,
-        inputId = "selected_variable",
-        choices = var_choice_vector(),
-        selected = NULL
-      )
-    })
+    rx_selected_variable <- mod_dynamic_selector_server(
+      id = "variable",
+      choices = var_choice_vector,
+      selected = reactive(NULL)
+    )
 
     return(
-      reactive(input$selected_variable)
+      rx_selected_variable
     )
   })
 }
