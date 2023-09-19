@@ -8,3 +8,4 @@ $run_dev.*
 ^unstats\.Rproj$
 ^README\.Rmd$
 ^LICENSE\.md$
+_\.new\.png$
