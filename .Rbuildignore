@@ -9,3 +9,5 @@ $run_dev.*
 ^README\.Rmd$
 ^LICENSE\.md$
 _\.new\.png$
+^app\.R$
+^rsconnect$
