@@ -5,20 +5,17 @@
 #' @import shiny
 #' @noRd
 app_ui <- function(request) {
-  tagList(
-    # Leave this function for adding external resources
+  bslib::page_sidebar(
     golem_add_external_resources(),
-    # Your application UI logic
-    fluidPage(
-      h1("UN Statistics"),
-      sidebarPanel(
-        mod_country_selection_ui("countries"),
-        mod_variable_selection_ui("x_variable", "X-axis variable"),
-        mod_variable_selection_ui("y_variable", "Y-axis variable")
-      ),
-      mainPanel(
-        mod_plots_ui("plot")
-      )
+    title = "UN Statistics",
+    sidebar = tagList(
+      mod_country_selection_ui("countries"),
+      mod_variable_selection_ui("x_variable", "X-axis variable"),
+      mod_variable_selection_ui("y_variable", "Y-axis variable")
+    ),
+    mod_plots_ui("plot"),
+    theme = bslib::bs_theme(
+      bootswatch = "sandstone"
     )
   )
 }
