@@ -9,15 +9,11 @@ Authors@R:
 Description: What the package does (one paragraph).
 License: MIT + file LICENSE
 Imports: 
-    attempt,
     bslib,
     config (>= 0.3.2),
     dplyr,
-    DT,
     ggplot2,
-    glue,
     golem (>= 0.4.1),
-    htmltools,
     rlang,
     shiny (>= 1.7.5)
 Encoding: UTF-8
