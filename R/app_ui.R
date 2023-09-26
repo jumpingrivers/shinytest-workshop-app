@@ -8,11 +8,7 @@ app_ui <- function(request) {
   bslib::page_sidebar(
     golem_add_external_resources(),
     title = "UN Statistics",
-    sidebar = tagList(
-      mod_country_selection_ui("countries"),
-      mod_variable_selection_ui("x_variable", "X-axis variable"),
-      mod_variable_selection_ui("y_variable", "Y-axis variable")
-    ),
+    sidebar = mod_sidebar_ui("sidebar"),
     mod_plots_ui("plot"),
     theme = bslib::bs_theme(
       bootswatch = "sandstone"
