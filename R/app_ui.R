@@ -9,7 +9,7 @@ app_ui <- function(request) {
     golem_add_external_resources(),
     title = "UN Statistics",
     sidebar = mod_sidebar_ui("sidebar"),
-    mod_plots_ui("plot"),
+    mod_content_ui("content"),
     theme = bslib::bs_theme(
       bootswatch = "sandstone"
     )

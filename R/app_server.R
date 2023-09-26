@@ -21,10 +21,10 @@ app_server <- function(input, output, session) {
     )
   })
 
-  mod_plots_server(
-    "plot",
+  mod_content_server(
+    "content",
     rx_plotting_dataset,
-    sidebar_params$x_var,
-    sidebar_params$y_var
+    x_variable = sidebar_params$x_var,
+    y_variable = sidebar_params$y_var
   )
 }
