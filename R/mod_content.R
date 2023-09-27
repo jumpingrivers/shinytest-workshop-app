@@ -11,6 +11,7 @@ mod_content_ui <- function(id) {
   ns <- NS(id)
   tagList(
     mod_plots_ui(ns("plot")),
+    mod_table_ui(ns("table"))
   )
 }
 
@@ -30,6 +31,13 @@ mod_content_server <- function(id,
 
     mod_plots_server(
       "plot",
+      rx_plotting_dataset,
+      x_variable,
+      y_variable
+    )
+
+    mod_table_server(
+      "table",
       rx_plotting_dataset,
       x_variable,
       y_variable
