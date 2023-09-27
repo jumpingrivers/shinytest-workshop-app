@@ -11,7 +11,7 @@ invert_names <- function(x) {
   if (is.null(names(x))) {
     stop("`x` must contain names in `invert_names(x)`")
   }
-  if(any(duplicated(x))) {
+  if (any(duplicated(x))) {
     stop("`x` must contain no duplicate values in `invert_names(x)`")
   }
 

@@ -12,7 +12,7 @@
 mod_variable_selection_ui <- function(id, label) {
   ns <- NS(id)
   tagList(
-    mod_dynamic_selector_ui(ns("variable"), label, multiple = FALSE),
+    mod_dynamic_selector_ui(ns("variable"), label, multiple = FALSE)
   )
 }
 
