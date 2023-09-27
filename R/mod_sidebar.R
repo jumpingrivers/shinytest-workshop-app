@@ -26,8 +26,14 @@ mod_sidebar_server <- function(id,
     ns <- session$ns
 
     rx_countries <- mod_country_selection_server("countries", rx_dataset)
-    rx_x_var <- mod_variable_selection_server("x_variable", rx_dataset)
-    rx_y_var <- mod_variable_selection_server("y_variable", rx_dataset)
+
+    numeric_colnames <- reactive(
+      get_numeric_colnames(rx_dataset())
+    )
+    initial_x_name <- reactive(numeric_colnames()[1])
+    initial_y_name <- reactive(numeric_colnames()[2])
+    rx_x_var <- mod_variable_selection_server("x_variable", rx_dataset, initial_x_name)
+    rx_y_var <- mod_variable_selection_server("y_variable", rx_dataset, initial_y_name)
 
     list(
       countries = rx_countries,

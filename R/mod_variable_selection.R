@@ -19,7 +19,10 @@ mod_variable_selection_ui <- function(id, label) {
 #' variable_selection Server Functions
 #'
 #' @noRd
-mod_variable_selection_server <- function(id, rx_dataset) {
+mod_variable_selection_server <- function(id, rx_dataset, initial_selected) {
+  stopifnot(is.reactive(rx_dataset))
+  stopifnot(is.reactive(initial_selected))
+
   moduleServer(id, function(input, output, session) {
     ns <- session$ns
 
@@ -43,7 +46,7 @@ mod_variable_selection_server <- function(id, rx_dataset) {
     selected_variable_name <- mod_dynamic_selector_server(
       id = "variable",
       choices = var_choice_vector,
-      selected = reactive(NULL)
+      selected = initial_selected
     )
 
     observe({
