@@ -1,0 +1,195 @@
+{
+  "input": {
+    "content-table-table_cell_clicked": {
+
+    },
+    "content-table-table_cells_selected": [
+
+    ],
+    "content-table-table_columns_selected": null,
+    "content-table-table_rows_all": null,
+    "content-table-table_rows_current": null,
+    "content-table-table_rows_selected": null,
+    "content-table-table_search": "",
+    "content-table-table_state": null,
+    "sidebar-countries-countries-user_selected": null,
+    "sidebar-countries-regions-user_selected": [
+      "Caribbean",
+      "EasternAfrica",
+      "EasternEurope"
+    ],
+    "sidebar-x_variable-variable-user_selected": "population_in_thousands_2017",
+    "sidebar-y_variable-variable-user_selected": "population_density_per_km2_2017"
+  },
+  "output": {
+    "content-plot-scatter": {
+      "src": "[image data hash: fb215eb702412c74416290655a4ff7b1]",
+      "width": 764,
+      "height": 389.59375,
+      "alt": "Plot object",
+      "coordmap": {
+        "panels": [
+          {
+            "panel": 1,
+            "row": 1,
+            "col": 1,
+            "panel_vars": {
+
+            },
+            "log": {
+              "x": null,
+              "y": null
+            },
+            "domain": {
+              "left": -7194.25,
+              "right": 151189.25,
+              "bottom": -49.76000000000001,
+              "top": 1238.56
+            },
+            "mapping": {
+              "x": ".data[[\"population_in_thousands_2017\"]]",
+              "y": ".data[[\"population_density_per_km2_2017\"]]"
+            },
+            "range": {
+              "left": 45.52568493150687,
+              "right": 758.5205479452054,
+              "bottom": 357.8464731501983,
+              "top": 5.479452054794521
+            }
+          }
+        ],
+        "dims": {
+          "width": 764,
+          "height": 389.59375
+        }
+      }
+    },
+    "content-table-table": {
+      "x": {
+        "style": "bootstrap5",
+        "filter": "none",
+        "vertical": false,
+        "container": "<table class=\"table table-striped table-hover row-border order-column display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>country<\/th>\n      <th>Population in thousands (2017)<\/th>\n      <th>Population density (per km2, 2017)<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>",
+        "options": {
+          "columnDefs": [
+            {
+              "className": "dt-right",
+              "targets": [
+                2,
+                3
+              ]
+            },
+            {
+              "orderable": false,
+              "targets": 0
+            }
+          ],
+          "order": [
+
+          ],
+          "autoWidth": false,
+          "orderClasses": false,
+          "ajax": {
+            "type": "POST",
+            "data": "function(d) {\nd.search.caseInsensitive = true;\nd.search.smart = true;\nd.escape = true;\nvar encodeAmp = function(x) { x.value = x.value.replace(/&/g, \"%26\"); }\nencodeAmp(d.search);\n$.each(d.columns, function(i, v) {encodeAmp(v.search);});\n}"
+          },
+          "serverSide": true,
+          "processing": true
+        },
+        "selection": {
+          "mode": "multiple",
+          "selected": null,
+          "target": "row",
+          "selectable": null
+        }
+      },
+      "evals": [
+        "options.ajax.data"
+      ],
+      "jsHooks": [
+
+      ],
+      "deps": [
+        {
+          "name": "jquery",
+          "version": "3.6.0",
+          "src": {
+            "href": "jquery-3.6.0"
+          },
+          "meta": null,
+          "script": "jquery-3.6.0.min.js",
+          "stylesheet": null,
+          "head": null,
+          "attachment": null,
+          "all_files": true
+        },
+        {
+          "name": "dt-core-bootstrap5",
+          "version": "1.13.4",
+          "src": {
+            "href": "dt-core-bootstrap5-1.13.4"
+          },
+          "meta": null,
+          "script": [
+            "js/jquery.dataTables.min.js",
+            "js/dataTables.bootstrap5.min.js"
+          ],
+          "stylesheet": "css/dataTables.bootstrap5.min.css",
+          "head": null,
+          "attachment": null,
+          "package": null,
+          "all_files": false
+        },
+        {
+          "name": "bootstrap",
+          "version": "5.2.2",
+          "src": {
+            "href": "bootstrap-5.2.2"
+          },
+          "meta": {
+            "viewport": "width=device-width, initial-scale=1, shrink-to-fit=no"
+          },
+          "script": "bootstrap.bundle.min.js",
+          "stylesheet": "bootstrap.min.css",
+          "head": null,
+          "attachment": null,
+          "package": null,
+          "all_files": true
+        },
+        {
+          "name": "bs3compat",
+          "version": "0.5.1",
+          "src": {
+            "href": "bs3compat-0.5.1"
+          },
+          "meta": null,
+          "script": [
+            "transition.js",
+            "tabs.js",
+            "bs3compat.js"
+          ],
+          "stylesheet": null,
+          "head": null,
+          "attachment": null,
+          "all_files": true
+        },
+        {
+          "name": "crosstalk",
+          "version": "1.2.0",
+          "src": {
+            "href": "crosstalk-1.2.0"
+          },
+          "meta": null,
+          "script": "js/crosstalk.min.js",
+          "stylesheet": "css/crosstalk.min.css",
+          "head": null,
+          "attachment": null,
+          "all_files": true
+        }
+      ]
+    }
+  },
+  "export": {
+
+  }
+}
