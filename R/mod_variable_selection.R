@@ -29,9 +29,7 @@ mod_variable_selection_server <- function(id, rx_dataset) {
     )
 
     all_numeric_vars <- reactive({
-      rx_dataset() |>
-        dplyr::select_if(is.numeric) |>
-        colnames()
+      get_numeric_colnames(rx_dataset())
     })
 
     var_choice_vector <- reactive({

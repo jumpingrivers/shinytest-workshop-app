@@ -13,3 +13,9 @@
 extract_unique <- function(x, column) {
   sort(unique(x[[column]]))
 }
+
+get_numeric_colnames <- function(x) {
+  x |>
+    dplyr::select_if(is.numeric) |>
+    colnames()
+}
