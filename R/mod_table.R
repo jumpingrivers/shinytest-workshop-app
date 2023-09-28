@@ -49,6 +49,27 @@ mod_table_server <- function(id,
   })
 }
 
+#' Module for presenting / formatting a table - as an app
+#'
+#' @export
+
+mod_table_app <- function(id = "table",
+                          rx_plotting_dataset,
+                          rx_x_var,
+                          rx_y_var) {
+  ui <- tagList(
+    golem_add_external_resources(),
+    mod_table_ui(id)
+  )
+
+  shinyApp(
+    ui = ui,
+    server = function(input, output, server) {
+      mod_table_server(id, rx_plotting_dataset, rx_x_var, rx_y_var)
+    }
+  )
+}
+
 ## To be copied in the UI
 # mod_table_ui("table_1")
 
