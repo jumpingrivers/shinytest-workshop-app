@@ -6,48 +6,55 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of unstats is to …
+This a golem-based shiny application for exploring UN statistics data
+about various countries. It was developed to support a workshop on
+testing shiny applications using {testthat}, `shiny::testServer` and
+{shinytest2} in Summer 2023.
 
 ## Installation
 
-You can install the development version of unstats like so:
+If you are a workshop attendee, you should download the repository
+either
+
+- using RStudio
+  - Go to “File -\> New Project”
+  - Click on “Version Control: Checkout a project from a version control
+    repository”
+  - Click on “Git: Clone a project from a repository”
+  - Fill in the URL of the project
+    `https://github.com/jumpingrivers/shinytest-workshop-app.git`
+- or using the command line (eg. the ‘terminal’ window in your RStudio
+  session):
+
+``` bash
+# 1) Git over SSH:
+git clone git@github.com:jumpingrivers/shinytest-workshop-app.git
+# or 2) Git over HTTPs
+git clone https://github.com/jumpingrivers/shinytest-workshop-app.git
+# or 3) Downloading the .zip file from github: https://github.com/jumpingrivers/shinytest-workshop-app
+```
+
+Once you have cloned the project, and opened it in RStudio, you can
+install all the dependencies used by the package, and required by the
+workshop by using
 
 ``` r
-# FILL THIS IN! HOW CAN PEOPLE INSTALL YOUR DEV PACKAGE?
+install.packages("devtools")
+devtools::install(dependencies = TRUE)
+```
+
+If you just want to use the application, you can install the development
+version of unstats like so:
+
+``` r
+remotes::install_github("jumpingrivers/shinytest2-workshop-app")
 ```
 
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
+To run the app
 
 ``` r
-library(unstats)
-## basic example code
+library("unstats")
+run_app()
 ```
-
-What is special about using `README.Rmd` instead of just `README.md`?
-You can include R chunks like so:
-
-``` r
-summary(cars)
-#>      speed           dist       
-#>  Min.   : 4.0   Min.   :  2.00  
-#>  1st Qu.:12.0   1st Qu.: 26.00  
-#>  Median :15.0   Median : 36.00  
-#>  Mean   :15.4   Mean   : 42.98  
-#>  3rd Qu.:19.0   3rd Qu.: 56.00  
-#>  Max.   :25.0   Max.   :120.00
-```
-
-You’ll still need to render `README.Rmd` regularly, to keep `README.md`
-up-to-date. `devtools::build_readme()` is handy for this. You could also
-use GitHub Actions to re-render `README.Rmd` every time you push. An
-example workflow can be found here:
-<https://github.com/r-lib/actions/tree/v1/examples>.
-
-You can also embed plots, for example:
-
-<img src="man/figures/README-pressure-1.png" width="100%" />
-
-In that case, don’t forget to commit and push the resulting figure
-files, so they display on GitHub and CRAN.
