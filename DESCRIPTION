@@ -22,6 +22,9 @@ LazyData: true
 RoxygenNote: 7.2.3
 Suggests: 
     janitor,
-    readr
+    readr,
+    testthat (>= 3.0.0)
 Depends: 
     R (>= 2.10)
+Config/testthat/edition: 3
+
